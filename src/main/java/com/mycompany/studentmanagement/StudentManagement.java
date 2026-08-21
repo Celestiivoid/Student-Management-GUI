@@ -36,7 +36,7 @@ public class StudentManagement {
         frame = new JFrame();
         
         frame.setTitle("Student Management System");
-        frame.setSize(500,400);
+        frame.setSize(550,400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel formPanel = new JPanel();
         JPanel mainPanel = new JPanel();
@@ -95,6 +95,7 @@ public class StudentManagement {
         buttonPanel.add(button1);
         buttonPanel.add(button2);
         buttonPanel.add(button3);
+        buttonPanel.add(button4);
         
         mainPanel.add(formPanel);
         mainPanel.add(buttonPanel);
@@ -106,7 +107,36 @@ public class StudentManagement {
     }
     
     public void updateStudent() {
+        String studentID = idField.getText();
+        String studentName = nameField.getText();
+        String studentAge = ageField.getText();
         
+        if(studentID.isEmpty() || studentName.isEmpty() || studentAge.isEmpty()) {
+                JOptionPane.showMessageDialog(frame,"All fields are required to be filled out.");
+                return;
+            }
+        
+        int selectedRow = studentTable.getSelectedRow();
+        
+        if(selectedRow == -1) {
+            JOptionPane.showMessageDialog(frame, "Please select a student to update.");
+            return;
+        }
+        
+        try {
+            int convertedID = Integer.parseInt(studentID);
+            int convertedAge = Integer.parseInt(studentAge);
+            
+            
+            Student updatedStudent = new Student(convertedID, studentName, convertedAge);
+            students.set(selectedRow, updatedStudent);
+            tableModel.setValueAt(idField.getText(), selectedRow, 0);
+            tableModel.setValueAt(nameField.getText(), selectedRow, 1);
+            tableModel.setValueAt(ageField.getText(), selectedRow, 2);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(frame,"ID or Age field must be numbers.");
+            return;
+        }
     }
     private void addStudent() {
          String studentID = idField.getText();
