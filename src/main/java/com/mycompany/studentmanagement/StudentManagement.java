@@ -26,7 +26,7 @@ public class StudentManagement {
     private JTable studentTable;
     private DefaultTableModel tableModel;
     
-    private ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<StudentArray> students = new ArrayList<>();
     
     public StudentManagement() {
         setupGUI();
@@ -128,7 +128,7 @@ public class StudentManagement {
             int convertedAge = Integer.parseInt(studentAge);
             
             
-            Student updatedStudent = new Student(convertedID, studentName, convertedAge);
+            StudentArray updatedStudent = new StudentArray(convertedID, studentName, convertedAge);
             students.set(selectedRow, updatedStudent);
             tableModel.setValueAt(idField.getText(), selectedRow, 0);
             tableModel.setValueAt(nameField.getText(), selectedRow, 1);
@@ -150,7 +150,7 @@ public class StudentManagement {
             try {
                 int convertedID = Integer.parseInt(studentID);
                 int convertedAge = Integer.parseInt(studentAge);
-                Student student = new Student(convertedID, studentName, convertedAge);
+                StudentArray student = new StudentArray(convertedID, studentName, convertedAge);
                 
                 students.add(student);
                 
@@ -188,7 +188,7 @@ public class StudentManagement {
         
         try {
             int convertedID = Integer.parseInt(studentID);
-            for(Student student : students) {
+            for(StudentArray student : students) {
                 if(convertedID == student.getStudentID()) {
                     isFound = true;
                     JOptionPane.showMessageDialog(frame,"Student found!" 
